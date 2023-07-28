@@ -6,7 +6,7 @@ let weHaveLocations
 let selectedLocationIndex
 let weHaveTheWeather = false
 let selectedLatitude
-let seletedLongitude
+let selectedLongitude
 let weatherData
 
 function setPossibleUserLocations(data){
@@ -29,7 +29,7 @@ function setWeatherData(data){
     </div>
     <form>
         <h2>Enter your location</h2>
-        <input id="location" bind:value={userInputLocation}>
+        <input class="bigger" id="location" bind:value={userInputLocation}>
         <br>
         <br>
         <button 
@@ -48,18 +48,20 @@ function setWeatherData(data){
             <br>
             <br>
         {#if weHaveLocations}
-            <select bind:value={selectedLocationIndex} name="locations">
+            <select class='bigger' 
+            bind:value={selectedLocationIndex} name="locations">
                 {#each possibleUserLocations as posLocation, index}
                 <option value={index}>{posLocation.name} - {posLocation.country} - {posLocation.state}</option>
                 {/each}
             </select>
-
+            <br>
+            <br>
             <button 
             on:click|preventDefault={()=>{
              selectedLatitude = possibleUserLocations[selectedLocationIndex].lat
-             seletedLongitude = possibleUserLocations[selectedLocationIndex].lon
+             selectedLongitude = possibleUserLocations[selectedLocationIndex].lon
 
-              let response = fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + selectedLatitude + '&lon=' + seletedLongitude + '&exclude={part}&appid=e7c5f8b9359c36785de51e91035b8fdb');
+              let response = fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + selectedLatitude + '&lon=' + selectedLongitude + '&units=metric&exclude={part}&appid=e7c5f8b9359c36785de51e91035b8fdb');
 
               response
               .then(data => data.json())
@@ -74,8 +76,12 @@ function setWeatherData(data){
     </form>
     {#if weHaveTheWeather}
     <div class="weather">
-      <p class="temperature">Temperature: 20°C</p>
-      <p class="description">Sunny</p>
+      <p class="bigger">Temperature: {Math.round(weatherData.current.temp)}°C</p>
+      <p class="bigger">Feels like: {Math.round(weatherData.current.feels_like)}°C</p>
+      <p class="bigger">Humidity: {weatherData.current.humidity}%</p>
+      <p class="bigger">Wind: {weatherData.current.wind_speed}km/h</p>
+      <p class="bigger">Wind direction: {weatherData.current.wind_deg}°</p>
+      <p class="bigger">UV Index Right Now: {weatherData.current.uvi}</p>
     </div>
     {/if}
   </div>
@@ -93,6 +99,11 @@ function setWeatherData(data){
 
 .weather {
   margin-top: 20px;
+  size: 2em;
+}
+
+.bigger{
+  font-size: 1.5em;
 }
 
 .temperature {
