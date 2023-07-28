@@ -3,11 +3,22 @@
 let userInputLocation = null
 let possibleUserLocations = null
 let weHaveLocations
+let selectedLocationIndex
+let weHaveTheWeather = false
+let selectedLatitude
+let seletedLongitude
+let weatherData
 
 function setPossibleUserLocations(data){
     possibleUserLocations = data
     weHaveLocations = true
     console.log(possibleUserLocations)
+}
+
+function setWeatherData(data){
+    weatherData = data
+    weHaveTheWeather = true
+    console.log(data)
 }
 
 </script>
@@ -37,18 +48,36 @@ function setPossibleUserLocations(data){
             <br>
             <br>
         {#if weHaveLocations}
-            <select name="locations">
-                {#each possibleUserLocations as posLocation}
-                <option>{posLocation.name} - {posLocation.country} - {posLocation.state}</option>
+            <select bind:value={selectedLocationIndex} name="locations">
+                {#each possibleUserLocations as posLocation, index}
+                <option value={index}>{posLocation.name} - {posLocation.country} - {posLocation.state}</option>
                 {/each}
             </select>
-           
+
+            <button 
+            on:click|preventDefault={()=>{
+             selectedLatitude = possibleUserLocations[selectedLocationIndex].lat
+             seletedLongitude = possibleUserLocations[selectedLocationIndex].lon
+
+              let response = fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + selectedLatitude + '&lon=' + seletedLongitude + '&exclude={part}&appid=e7c5f8b9359c36785de51e91035b8fdb');
+
+              response
+              .then(data => data.json())
+              .then(data => setWeatherData(data))
+              .catch((error) => {
+                console.error('Error:', error);
+              })
+            }}
+              >Give me the weather!</button>
         {/if}
+        
     </form>
+    {#if weHaveTheWeather}
     <div class="weather">
       <p class="temperature">Temperature: 20°C</p>
       <p class="description">Sunny</p>
     </div>
+    {/if}
   </div>
 
 <style scoped>
