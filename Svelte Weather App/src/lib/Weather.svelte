@@ -1,13 +1,13 @@
 <script>
 
 let userInputLocation = null
-let possibleUserLocations
+let possibleUserLocations = null
 let weHaveLocations
 
 function setPossibleUserLocations(data){
     possibleUserLocations = data
+    weHaveLocations = true
     console.log(possibleUserLocations)
-    console.log(weHaveLocations)
 }
 
 </script>
@@ -23,6 +23,7 @@ function setPossibleUserLocations(data){
         <br>
         <button 
         on:click|preventDefault={()=>{
+
             let response = fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + userInputLocation +'&limit=5&appid=e7c5f8b9359c36785de51e91035b8fdb');
 
             response
@@ -30,14 +31,15 @@ function setPossibleUserLocations(data){
             .then(data => setPossibleUserLocations(data))
             .catch((error) => {
               console.error('Error:', error);
-            })
-            weHaveLocations = true;}}
+            })}}
+
         >Go!</button>
+            <br>
+            <br>
         {#if weHaveLocations}
-           
             <select name="locations">
                 {#each possibleUserLocations as posLocation}
-                <option>{posLocation}</option>
+                <option>{posLocation.name} - {posLocation.country} - {posLocation.state}</option>
                 {/each}
             </select>
            
