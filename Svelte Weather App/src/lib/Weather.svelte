@@ -1,8 +1,12 @@
 <script>
 import FancyTempSlider from "./FancyTempSlider.svelte";
+import { fade } from 'svelte/transition';
+import { fly } from 'svelte/transition';
 
 let userInputLocation = null
 let possibleUserLocations = null
+
+
 let weHaveLocations
 let selectedLocationIndex
 let weHaveTheWeather = false
@@ -12,6 +16,7 @@ let weatherData
 let isFahrenheit = false
 let unitsOfMeasurement = "metric"
 let temperatureUnit = "°C"
+let hideForm = false
 
 function setPossibleUserLocations(data){
     possibleUserLocations = data
@@ -21,7 +26,13 @@ function setPossibleUserLocations(data){
 
 function setWeatherData(data){
     weatherData = data
-    weHaveTheWeather = true
+    console.log(weatherData)
+    // wait 550 milliseconds so the transition can finish before showing the data
+    setTimeout(() => {
+        weHaveTheWeather = true
+    }, 550);
+    
+    hideForm = true
     console.log(data)
 }
 
@@ -47,8 +58,10 @@ function handleTempComponent(event){
 <br>
 <img src="..\src\assets\Stormscout-transformed.png">
 <div class="container">
-    
-    <form>
+
+  {#if !hideForm}
+    <form transition:fade={{ duration: 500 }}>
+      
         <h2>Enter your location</h2>
         <input class="bigger" id="location" bind:value={userInputLocation}>
         <br>
@@ -93,10 +106,12 @@ function handleTempComponent(event){
             }}
               >Give me the weather!</button>
         {/if}
-        
     </form>
+    {/if}
     {#if weHaveTheWeather}
-    <div class="weather">
+    <div class="weather container" transition:fly={{ y: 200, duration: 1000 }}>
+    <h2>Weather for {possibleUserLocations[selectedLocationIndex].name}</h2>
+    
       <p class="bigger">Temperature: {Math.round(weatherData.current.temp)}{temperatureUnit}</p>
       <p class="bigger">Feels like: {Math.round(weatherData.current.feels_like)}{temperatureUnit}</p>
       <p class="bigger">Humidity: {weatherData.current.humidity}%</p>
@@ -105,6 +120,17 @@ function handleTempComponent(event){
       <p class="bigger">UV Index Right Now: {weatherData.current.uvi}</p>
     </div>
     {/if}
+    <!-- Dummy template for design testing-->
+    <div class="weather container" >
+      <h2>Weather for Richards Bay</h2>
+      
+        <p class="bigger">Temperature: 24°C</p>
+        <p class="bigger">Feels like: 56°C</p>
+        <p class="bigger">Humidity: 50%</p>
+        <p class="bigger">Wind: 8.57</p>
+        <p class="bigger">Wind direction: 11°</p>
+        <p class="bigger">UV Index Right Now: 0</p>
+      </div>
   </div>
 
 <style scoped>
@@ -129,6 +155,12 @@ h2{font-weight: 400;}
 .weather {
   margin-top: 20px;
   size: 2em;
+
+}
+
+.weather p {
+  text-align: left;
+  padding-left: 30%;
 }
 
 .bigger{
