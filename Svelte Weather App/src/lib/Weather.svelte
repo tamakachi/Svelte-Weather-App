@@ -1,7 +1,6 @@
 <script>
 import FancyTempSlider from "./FancyTempSlider.svelte";
 
-
 let userInputLocation = null
 let possibleUserLocations = null
 let weHaveLocations
@@ -42,6 +41,7 @@ function handleTempComponent(event){
 </script>
 
 <FancyTempSlider on:message={handleTempComponent}/>
+
 <br>
 <br>
 <br>
