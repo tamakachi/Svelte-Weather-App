@@ -45,12 +45,8 @@ function handleTempComponent(event){
 <br>
 <br>
 <br>
+<img src="..\src\assets\Stormscout-transformed.png">
 <div class="container">
-    
-
-
-
-      <h1>Weather</h1>
     
     <form>
         <h2>Enter your location</h2>
@@ -114,7 +110,7 @@ function handleTempComponent(event){
 <style scoped>
 
 /* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap');
 
 *{
   font-family: 'Raleway', sans-serif;
@@ -123,6 +119,8 @@ function handleTempComponent(event){
   width: 400px;
   margin: 0 auto;
 }
+
+h2{font-weight: 400;}
 
 .header {
   text-align: center;
@@ -151,88 +149,53 @@ input {
   border-radius: 7px;
   border: 1px solid rgb(61, 106, 255);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 2px;
   background: transparent;
-  color: #fff;
+  color: black;
   overflow: hidden;
   box-shadow: 0 0 0 0 transparent;
   text-align: center;
 }
 
 /* Fancy button CSS */
-
 button {
-  position: relative;
-  padding: 10px 20px;
-  border-radius: 7px;
-  border: 1px solid rgb(61, 106, 255);
-  font-size: 14px;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  letter-spacing: 5px;
   text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 2px;
-  background: transparent;
-  color: #fff;
+  color: #2596be;
+  transition: all 1000ms;
+  font-size: 15px;
+  position: relative;
   overflow: hidden;
-  box-shadow: 0 0 0 0 transparent;
-  -webkit-transition: all 0.2s ease-in;
-  -moz-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
+  outline: 2px solid #2596be;
 }
 
 button:hover {
-  background: rgb(61, 106, 255);
-  box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
-  -webkit-transition: all 0.2s ease-out;
-  -moz-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-}
-
-button:hover::before {
-  -webkit-animation: sh02 0.5s 0s linear;
-  -moz-animation: sh02 0.5s 0s linear;
-  animation: sh02 0.5s 0s linear;
+  color: #ffffff;
+  transform: scale(1.1);
+  outline: 2px solid #70bdca;
+  box-shadow: 4px 5px 17px -4px #268391;
 }
 
 button::before {
-  content: '';
-  display: block;
-  width: 0px;
-  height: 86%;
+  content: "";
   position: absolute;
-  top: 7%;
-  left: 0%;
-  opacity: 0;
-  background: #fff;
-  box-shadow: 0 0 50px 30px #fff;
-  -webkit-transform: skewX(-20deg);
-  -moz-transform: skewX(-20deg);
-  -ms-transform: skewX(-20deg);
-  -o-transform: skewX(-20deg);
-  transform: skewX(-20deg);
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #2596be;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
 }
 
-@keyframes sh02 {
-  from {
-    opacity: 0;
-    left: 0%;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-    left: 100%;
-  }
-}
-
-button:active {
-  box-shadow: 0 0 0 0 transparent;
-  -webkit-transition: box-shadow 0.2s ease-in;
-  -moz-transition: box-shadow 0.2s ease-in;
-  transition: box-shadow 0.2s ease-in;
+button:hover::before {
+  width: 250%;
 }
 
 
@@ -242,10 +205,10 @@ select {
   border-radius: 7px;
   border: 1px solid rgb(61, 106, 255);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 2px;
   background: transparent;
-  color: #fff;
+  color: black;
   overflow: hidden;
   box-shadow: 0 0 0 0 transparent;
   -webkit-transition: all 0.2s ease-in;
