@@ -120,6 +120,8 @@ function handleTempComponent(event){
       <p class="bigger">UV Index Right Now: {weatherData.current.uvi}</p>
     </div>
     {/if}
+
+
     <!-- Dummy template for design testing-->
     <div class="weather container" >
       <h2>Weather for Richards Bay</h2>
