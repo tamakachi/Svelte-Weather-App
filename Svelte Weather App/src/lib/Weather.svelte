@@ -3,6 +3,7 @@ import FancyTempSlider from "./FancyTempSlider.svelte";
 import { fade } from 'svelte/transition';
 import { fly } from 'svelte/transition';
 
+
 let userInputLocation = null
 let possibleUserLocations = null
 
@@ -10,14 +11,24 @@ let possibleUserLocations = null
 let weHaveLocations
 let selectedLocationIndex
 let weHaveTheWeather = false
+
+// For the geolocation API
 let selectedLatitude
 let selectedLongitude
+
+// Holds the weather data after it comes back from the API
 let weatherData
+
+// Metric and imperial variables
 let isFahrenheit = false
 let unitsOfMeasurement = "metric"
 let temperatureUnit = "°C"
+
+// Hides the form when we have the weather data
 let hideForm = false
 
+
+// Populates possibleUserLocations array from the API with multiple locations that match the input
 function setPossibleUserLocations(data){
     possibleUserLocations = data
     weHaveLocations = true
@@ -36,6 +47,8 @@ function setWeatherData(data){
     console.log(data)
 }
 
+// Changes the units of measurement when the FancyTempSlider component dispatches an event caused by the user clicking the slider in the component
+
 function handleTempComponent(event){
     isFahrenheit = event.detail.text
     if(isFahrenheit){
@@ -45,19 +58,20 @@ function handleTempComponent(event){
         unitsOfMeasurement = "metric"
         temperatureUnit = "°C"
     }
-
-
 }
-
 </script>
-
+{#if !hideForm}
+<div transition:fade={{ duration: 500 }}>
 <FancyTempSlider on:message={handleTempComponent}/>
 
 <br>
 <br>
 <br>
-<img src="..\src\assets\Stormscout-transformed.png">
+<img src="..\src\assets\Stormscout-transformed.png" alt="Stormscout">
+</div>
+{/if}
 <div class="container">
+  
 
   {#if !hideForm}
     <form transition:fade={{ duration: 500 }}>
@@ -110,29 +124,86 @@ function handleTempComponent(event){
     {/if}
     {#if weHaveTheWeather}
     <div class="weather container" transition:fly={{ y: 200, duration: 1000 }}>
-    <h2>Weather for {possibleUserLocations[selectedLocationIndex].name}</h2>
-    
-      <p class="bigger">Temperature: {Math.round(weatherData.current.temp)}{temperatureUnit}</p>
-      <p class="bigger">Feels like: {Math.round(weatherData.current.feels_like)}{temperatureUnit}</p>
-      <p class="bigger">Humidity: {weatherData.current.humidity}%</p>
-      <p class="bigger">Wind: {weatherData.current.wind_speed}</p>
-      <p class="bigger">Wind direction: {weatherData.current.wind_deg}°</p>
-      <p class="bigger">UV Index Right Now: {weatherData.current.uvi}</p>
-    </div>
+      
+        <h2 id="final-location">{possibleUserLocations[selectedLocationIndex].name}</h2>
+        
+        <div class="weather-info">
+          <div class="weather-item">
+            <p class="bigger">Temperature:</p>
+            <img src="..\public\temperature2_64.png">
+            <p class="weather-data"> {Math.round(weatherData.current.temp)}{temperatureUnit}</p>
+          </div>
+          <div class="weather-item">
+            <p class="bigger">Feels like:</p>
+            <img src="..\public\senses.png">
+            <p class="weather-data"> {Math.round(weatherData.current.feels_like)}{temperatureUnit}</p>
+          </div>
+          <div class="weather-item">
+            <p class="bigger">Humidity:</p>
+            <img src="..\public\humidity.png">
+            <p class="weather-data"> {weatherData.current.humidity}%</p>
+          </div>
+          <div class="weather-item">
+            <p class="bigger">Wind:</p>
+            <img src="..\public\wind.png">
+            <p class="weather-data"> {weatherData.current.wind_speed}</p>
+          </div>
+          <div class="weather-item">
+            <p class="bigger">Wind direction:</p>
+            <img src="..\public\vane.png">
+            <p class="weather-data"> {weatherData.current.wind_deg}°</p>
+          </div>
+          <div class="weather-item">
+            <p class="bigger">UV Index:</p>
+            <img src="..\public\sun.png">
+            <p class="weather-data"> {weatherData.current.uvi}</p>
+          </div>
+        </div>
+      </div>
+  
     {/if}
 
+    
 
-    <!-- Dummy template for design testing-->
-    <div class="weather container" >
-      <h2>Weather for Richards Bay</h2>
-      
-        <p class="bigger">Temperature: 24°C</p>
-        <p class="bigger">Feels like: 56°C</p>
-        <p class="bigger">Humidity: 50%</p>
-        <p class="bigger">Wind: 8.57</p>
-        <p class="bigger">Wind direction: 11°</p>
-        <p class="bigger">UV Index Right Now: 0</p>
-      </div>
+<!--  Dummy data for testing purposes
+  
+  <div class="weather container" >
+  <h2>Richards Bay</h2>
+  
+  <div class="weather-info">
+    <div class="weather-item">
+      <p class="bigger">Temperature:</p>
+      <img src="..\public\temperature2_64.png">
+      <p class="weather-data"> 24°C</p>
+    </div>
+    <div class="weather-item">
+      <p class="bigger">Feels like:</p>
+      <img src="..\public\senses.png">
+      <p class="weather-data"> 56°C</p>
+    </div>
+    <div class="weather-item">
+      <p class="bigger">Humidity:</p>
+      <img src="..\public\humidity.png">
+      <p class="weather-data"> 50%</p>
+    </div>
+    <div class="weather-item">
+      <p class="bigger">Wind:</p>
+      <img src="..\public\wind.png">
+      <p class="weather-data"> 8.57</p>
+    </div>
+    <div class="weather-item">
+      <p class="bigger">Wind direction:</p>
+      <img src="..\public\vane.png">
+      <p class="weather-data"> 11°</p>
+    </div>
+    <div class="weather-item">
+      <p class="bigger">UV Index:</p>
+      <img src="..\public\uv.png">
+      <p class="weather-data"> 0</p>
+    </div>
+  </div>
+</div> -->
+
   </div>
 
 <style scoped>
@@ -143,16 +214,52 @@ function handleTempComponent(event){
 *{
   font-family: 'Raleway', sans-serif;
 }
+
+#final-location{
+  
+  font-weight: 400;
+  font-size: 2.5em;
+
+}
+.weather-data {
+  margin: 0;
+  font-size: 1.4em;
+  font-weight: 500;
+  color:#333;
+  margin-left: 25% !important;
+  margin-right: 25% !important;
+  
+}
+
+.bigger {
+  font-size: 1.25em;
+  font-weight: 500;
+  color:#444;
+}
+
+.weather-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+ .weather-item {
+  flex-basis: calc(50% - 10px);
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+
 .container {
   width: 400px;
   margin: 0 auto;
 }
 
-h2{font-weight: 400;}
-
-.header {
-  text-align: center;
+h2{
+  font-weight: 400;
+  font-size: 1.75em;
 }
+
+
 
 .weather {
   margin-top: 20px;
@@ -161,20 +268,7 @@ h2{font-weight: 400;}
 }
 
 .weather p {
-  text-align: left;
-  padding-left: 30%;
-}
-
-.bigger{
-  font-size: 1.5em;
-}
-
-.temperature {
-  font-size: 3em;
-}
-
-.description {
-  font-size: 1.5em;
+  text-align: center;
 }
 
 input {
