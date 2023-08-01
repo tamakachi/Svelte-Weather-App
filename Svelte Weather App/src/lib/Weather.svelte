@@ -29,12 +29,9 @@ let isFahrenheit = false
 let unitsOfMeasurement = "metric"
 let temperatureUnit = "°C"
 let unitOfWindSpeed = "m/s"
+let windDirection = null
 // Hides the form when we have the weather data
 let hideForm = false
-
-
-
-
 
 // Populates possibleUserLocations array from the API with multiple locations that match the input
 function setPossibleUserLocations(data){
@@ -43,8 +40,48 @@ function setPossibleUserLocations(data){
     console.log(possibleUserLocations)
 }
 
+// Function takes degrees and converts them to a cardinal direction then stores it in windDirection
+function getCardinalDirection(degrees){
+    if(degrees > 11.25 && degrees < 33.75){
+        windDirection = "NNE"
+    } else if(degrees > 33.75 && degrees < 56.25){
+        windDirection = "NE"
+    } else if(degrees > 56.25 && degrees < 78.75){
+        windDirection = "ENE"
+    } else if(degrees > 78.75 && degrees < 101.25){
+        windDirection = "E"
+    } else if(degrees > 101.25 && degrees < 123.75){
+        windDirection = "ESE"
+    } else if(degrees > 123.75 && degrees < 146.25){
+        windDirection = "SE"
+    } else if(degrees > 146.25 && degrees < 168.75){
+        windDirection = "SSE"
+    } else if(degrees > 168.75 && degrees < 191.25){
+        windDirection = "S"
+    } else if(degrees > 191.25 && degrees < 213.75){
+        windDirection = "SSW"
+    } else if(degrees > 213.75 && degrees < 236.25){
+        windDirection = "SW"
+    } else if(degrees > 236.25 && degrees < 258.75){
+        windDirection = "WSW"
+    } else if(degrees > 258.75 && degrees < 281.25){
+        windDirection = "W"
+    } else if(degrees > 281.25 && degrees < 303.75){
+        windDirection = "WNW"
+    } else if(degrees > 303.75 && degrees < 326.25){
+        windDirection = "NW"
+    } else if(degrees > 326.25 && degrees < 348.75){
+        windDirection = "NNW"
+    } else {
+        windDirection = "N"
+    }
+}
+
+// Populates the weatherData object with the weather data from the API
+
 function setWeatherData(data){
     weatherData = data
+    getCardinalDirection(weatherData.current.wind_deg)
     console.log(weatherData)
     // wait 550 milliseconds so the transition can finish before showing the data
     setTimeout(() => {
@@ -78,6 +115,9 @@ function redo(){
                           userInputLocation = null
                         }, 500);
                     }
+
+
+
 
 </script>
 {#if !hideForm}
@@ -172,7 +212,7 @@ function redo(){
           <div class="weather-item">
             <p class="bigger">Wind direction:</p>
             <img src="..\public\vane.png">
-            <p class="weather-data"> {weatherData.current.wind_deg}°</p>
+            <p class="weather-data"> {windDirection}</p>
           </div>
           <div class="weather-item">
             <p class="bigger">UV Index:</p>
