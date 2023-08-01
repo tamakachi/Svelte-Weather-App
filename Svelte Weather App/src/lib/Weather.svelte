@@ -1,7 +1,12 @@
 <script>
+
 import FancyTempSlider from "./FancyTempSlider.svelte";
+
+
 import { fade } from 'svelte/transition';
 import { fly } from 'svelte/transition';
+import { quintOut } from 'svelte/easing';
+import { blur } from 'svelte/transition';
 
 
 let userInputLocation = null
@@ -23,7 +28,7 @@ let weatherData
 let isFahrenheit = false
 let unitsOfMeasurement = "metric"
 let temperatureUnit = "°C"
-
+let unitOfWindSpeed = "m/s"
 // Hides the form when we have the weather data
 let hideForm = false
 
@@ -54,9 +59,12 @@ function handleTempComponent(event){
     if(isFahrenheit){
         unitsOfMeasurement = "imperial"
         temperatureUnit = "°F"
+        unitOfWindSpeed = "mph"
+
     } else {
         unitsOfMeasurement = "metric"
         temperatureUnit = "°C"
+        unitOfWindSpeed = "m/s"
     }
 }
 </script>
@@ -123,8 +131,9 @@ function handleTempComponent(event){
     </form>
     {/if}
     {#if weHaveTheWeather}
-    <div class="weather container" transition:fly={{ y: 200, duration: 1000 }}>
-      
+    <div class="weather container" transition:blur={{ amount: 10 }}>
+
+      <img class="third-size" src="..\src\assets\Stormscout-Logo-Only.png" alt="Stormscout">
         <h2 id="final-location">{possibleUserLocations[selectedLocationIndex].name}</h2>
         
         <div class="weather-info">
@@ -146,7 +155,7 @@ function handleTempComponent(event){
           <div class="weather-item">
             <p class="bigger">Wind:</p>
             <img src="..\public\wind.png">
-            <p class="weather-data"> {weatherData.current.wind_speed}</p>
+            <p class="weather-data"> {weatherData.current.wind_speed} {unitOfWindSpeed}</p>
           </div>
           <div class="weather-item">
             <p class="bigger">Wind direction:</p>
@@ -159,50 +168,17 @@ function handleTempComponent(event){
             <p class="weather-data"> {weatherData.current.uvi}</p>
           </div>
         </div>
+        <button 
+        on:click={()=>{
+          hideForm = !hideForm
+          weHaveLocations = false
+          weHaveTheWeather = false
+
+          }} 
+          class="top-margin">Choose Again</button>
       </div>
   
     {/if}
-
-    
-
-<!--  Dummy data for testing purposes
-  
-  <div class="weather container" >
-  <h2>Richards Bay</h2>
-  
-  <div class="weather-info">
-    <div class="weather-item">
-      <p class="bigger">Temperature:</p>
-      <img src="..\public\temperature2_64.png">
-      <p class="weather-data"> 24°C</p>
-    </div>
-    <div class="weather-item">
-      <p class="bigger">Feels like:</p>
-      <img src="..\public\senses.png">
-      <p class="weather-data"> 56°C</p>
-    </div>
-    <div class="weather-item">
-      <p class="bigger">Humidity:</p>
-      <img src="..\public\humidity.png">
-      <p class="weather-data"> 50%</p>
-    </div>
-    <div class="weather-item">
-      <p class="bigger">Wind:</p>
-      <img src="..\public\wind.png">
-      <p class="weather-data"> 8.57</p>
-    </div>
-    <div class="weather-item">
-      <p class="bigger">Wind direction:</p>
-      <img src="..\public\vane.png">
-      <p class="weather-data"> 11°</p>
-    </div>
-    <div class="weather-item">
-      <p class="bigger">UV Index:</p>
-      <img src="..\public\uv.png">
-      <p class="weather-data"> 0</p>
-    </div>
-  </div>
-</div> -->
 
   </div>
 
@@ -213,6 +189,14 @@ function handleTempComponent(event){
 
 *{
   font-family: 'Raleway', sans-serif;
+}
+
+.third-size{
+  width: 30%;
+}
+
+.top-margin {
+  margin-top: 20px;
 }
 
 #final-location{
