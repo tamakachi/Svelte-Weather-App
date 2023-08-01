@@ -82,7 +82,7 @@ function redo(){
 </script>
 {#if !hideForm}
 <div transition:blur={{ amount: 10 }}>
-<FancyTempSlider on:message={handleTempComponent}/>
+<FancyTempSlider on:message={handleTempComponent} isFahrenheit={isFahrenheit}/>
 
 <br>
 <br>

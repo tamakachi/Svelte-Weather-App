@@ -1,7 +1,8 @@
 <script>
 import { createEventDispatcher } from 'svelte';
 
-let isFahrenheit = false
+export let isFahrenheit = false
+$: isChecked = isFahrenheit
 
 const dispatch = createEventDispatcher();
 
@@ -20,7 +21,7 @@ function bubbleUpIsFarenheit() {
   <!-- Fancy button HTML goes here-->
   <span class='paddingX bigger'>Celsius</span>
   <label class="switch">
-    <input on:input={bubbleUpIsFarenheit} type="checkbox" class="input__check">
+    <input on:input={bubbleUpIsFarenheit} bind:checked={isChecked} type="checkbox" class="input__check">
     <span class="slider"></span>
   </label>
   <span class='paddingX bigger'>Farenheit</span>
