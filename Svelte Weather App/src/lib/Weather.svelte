@@ -33,6 +33,9 @@ let unitOfWindSpeed = "m/s"
 let hideForm = false
 
 
+
+
+
 // Populates possibleUserLocations array from the API with multiple locations that match the input
 function setPossibleUserLocations(data){
     possibleUserLocations = data
@@ -67,9 +70,18 @@ function handleTempComponent(event){
         unitOfWindSpeed = "m/s"
     }
 }
+// Waits 500ms then shows the form and hides the weather data
+function redo(){
+                        setTimeout(() => {
+                          hideForm = !hideForm
+                          weHaveLocations = false
+                          userInputLocation = null
+                        }, 500);
+                    }
+
 </script>
 {#if !hideForm}
-<div transition:fade={{ duration: 500 }}>
+<div transition:blur={{ amount: 10 }}>
 <FancyTempSlider on:message={handleTempComponent}/>
 
 <br>
@@ -82,7 +94,7 @@ function handleTempComponent(event){
   
 
   {#if !hideForm}
-    <form transition:fade={{ duration: 500 }}>
+    <form transition:blur={{ amount: 10 }}>
       
         <h2>Enter your location</h2>
         <input class="bigger" id="location" bind:value={userInputLocation}>
@@ -170,9 +182,9 @@ function handleTempComponent(event){
         </div>
         <button 
         on:click={()=>{
-          hideForm = !hideForm
-          weHaveLocations = false
           weHaveTheWeather = false
+          redo()
+          
 
           }} 
           class="top-margin">Choose Again</button>
