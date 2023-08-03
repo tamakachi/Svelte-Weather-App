@@ -391,7 +391,7 @@ button:hover::before {
 
 
 input {
-  width: 100%;
+  width: 85%;
   padding: 10px;
   border-radius: 7px;
   border: 1px solid rgb(61, 106, 255);
@@ -403,11 +403,14 @@ input {
   overflow: hidden;
   box-shadow: 0 0 0 0 transparent;
   text-align: center;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
 }
 
 select {
   
-  width: 106%;
+  width: 92%;
   padding: 10px;
   border-radius: 7px;
   border: 1px solid rgb(61, 106, 255);
@@ -438,7 +441,7 @@ select {
     width: 75%;
   }
   input {
-  width: 75%;
+  width: 70%;
   padding: 10px;
   border-radius: 7px;
   border: 1px solid rgb(61, 106, 255);
@@ -452,7 +455,7 @@ select {
   text-align: center;
 }
 select{
-  width: 80%;
+  width: 75%;
 }
 }
 
