@@ -127,7 +127,7 @@ function redo(){
 <br>
 <br>
 <br>
-<img src="..\src\assets\Stormscout-transformed.png" alt="Stormscout">
+<img src="Stormscout-transformed.png" alt="Stormscout">
 </div>
 {/if}
 <div class="container">
@@ -185,7 +185,7 @@ function redo(){
     {#if weHaveTheWeather}
     <div class="weather container" transition:blur={{ amount: 10 }}>
 
-      <img class="third-size" src="..\src\assets\Stormscout-Logo-Only.png" alt="Stormscout">
+      <img class="third-size" src="Stormscout-Logo-Only.png" alt="Stormscout">
         <h2 id="final-location">{possibleUserLocations[selectedLocationIndex].name}</h2>
         
         <div class="weather-info">
