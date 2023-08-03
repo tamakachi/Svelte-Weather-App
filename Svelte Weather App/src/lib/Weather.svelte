@@ -8,6 +8,8 @@ import { fly } from 'svelte/transition';
 import { quintOut } from 'svelte/easing';
 import { blur } from 'svelte/transition';
 
+//remove this import later and from the package.json
+import * as animateScroll from "svelte-scrollto";
 
 let userInputLocation = null
 let possibleUserLocations = null
@@ -34,10 +36,13 @@ let windDirection = null
 let hideForm = false
 
 // Populates possibleUserLocations array from the API with multiple locations that match the input
+// Then it scrolls down the page
 function setPossibleUserLocations(data){
     possibleUserLocations = data
     weHaveLocations = true
     console.log(possibleUserLocations)
+
+    customScrollToBottom()
 }
 
 // Function takes degrees and converts them to a cardinal direction then stores it in windDirection
@@ -117,6 +122,18 @@ function redo(){
                     }
 
 
+
+function customScrollToBottom(){
+  //wait 50ms then scroll to the bottom of the page smoothly using vanilla JS
+  setTimeout(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, 50);
+
+}
 </script>
 
 
@@ -128,7 +145,7 @@ function redo(){
 <br>
 <br>
 <br>
-<img src="Stormscout-transformed.png" alt="Stormscout">
+<img class ="main-logo"src="Stormscout-transformed.png" alt="Stormscout">
 </div>
 {/if}
 <div class="container">
@@ -151,7 +168,10 @@ function redo(){
             .then(data => setPossibleUserLocations(data))
             .catch((error) => {
               console.error('Error:', error);
+              
+             
             })}}
+            
 
         >Go!</button>
             <br>
@@ -386,5 +406,13 @@ select {
   transition: all 0.2s ease-in;
 }
 
+/* Responsive elements */
+
+/* Makes the logo smaller on mobile devices */
+@media screen and (max-width: 600px) {
+  .main-logo{
+    width: 75%;
+  }
+}
 
 </style>
