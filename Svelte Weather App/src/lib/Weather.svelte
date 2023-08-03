@@ -184,7 +184,7 @@ function customScrollToBottom(){
             <br>
             <br>
         {#if weHaveLocations}
-            <select class='bigger' 
+            <select class='bigger space' 
             bind:value={selectedLocationIndex} name="locations">
                 {#each possibleUserLocations as posLocation, index}
                 <option value={index}>{posLocation.name} - {posLocation.country} - {posLocation.state}</option>
@@ -345,20 +345,9 @@ h2{
   text-align: center;
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 7px;
-  border: 1px solid rgb(61, 106, 255);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  background: transparent;
-  color: black;
-  overflow: hidden;
-  box-shadow: 0 0 0 0 transparent;
-  text-align: center;
-}
+
+
+
 
 /* Fancy button CSS */
 button {
@@ -401,8 +390,24 @@ button:hover::before {
 }
 
 
-select {
+input {
   width: 100%;
+  padding: 10px;
+  border-radius: 7px;
+  border: 1px solid rgb(61, 106, 255);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  background: transparent;
+  color: black;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  text-align: center;
+}
+
+select {
+  
+  width: 106%;
   padding: 10px;
   border-radius: 7px;
   border: 1px solid rgb(61, 106, 255);
@@ -416,6 +421,7 @@ select {
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
+  text-align: center;
 }
 
 .developer{
@@ -431,6 +437,23 @@ select {
   .main-logo{
     width: 75%;
   }
+  input {
+  width: 75%;
+  padding: 10px;
+  border-radius: 7px;
+  border: 1px solid rgb(61, 106, 255);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  background: transparent;
+  color: black;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  text-align: center;
+}
+select{
+  width: 80%;
+}
 }
 
 </style>
