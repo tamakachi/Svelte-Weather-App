@@ -69,3 +69,16 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Responsive padding */
+
+@media screen and (max-width: 600px) {
+  #app {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    padding-left: 0rem;
+    padding-right: 2rem;
+    text-align: center;
+  }
+}
