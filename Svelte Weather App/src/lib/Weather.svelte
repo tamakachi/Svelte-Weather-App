@@ -2,6 +2,9 @@
 
 import FancyTempSlider from "./FancyTempSlider.svelte";
 
+import toast, { Toaster } from 'svelte-french-toast';
+
+
 
 import { fade } from 'svelte/transition';
 import { fly } from 'svelte/transition';
@@ -137,7 +140,7 @@ function customScrollToBottom(){
 </script>
 
 
-
+<Toaster />
 {#if !hideForm}
 <div transition:blur={{ amount: 10 }}>
 <FancyTempSlider on:message={handleTempComponent} isFahrenheit={isFahrenheit}/>
@@ -149,6 +152,7 @@ function customScrollToBottom(){
 </div>
 {/if}
 <div class="container">
+  
   
 
   {#if !hideForm}
@@ -168,6 +172,9 @@ function customScrollToBottom(){
             .then(data => setPossibleUserLocations(data))
             .catch((error) => {
               console.error('Error:', error);
+              toast.error('There was an error fetching the data', {
+                  position: "bottom-center"
+                })
               
              
             })}}
@@ -197,6 +204,9 @@ function customScrollToBottom(){
               .then(data => setWeatherData(data))
               .catch((error) => {
                 console.error('Error:', error);
+                toast.error('There was an error fetching the data', {
+                  position: "bottom-center"
+                })
               })
             }}
               >Give me the weather!</button>
