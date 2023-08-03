@@ -117,9 +117,10 @@ function redo(){
                     }
 
 
-
-
 </script>
+
+
+
 {#if !hideForm}
 <div transition:blur={{ amount: 10 }}>
 <FancyTempSlider on:message={handleTempComponent} isFahrenheit={isFahrenheit}/>
@@ -137,7 +138,7 @@ function redo(){
     <form transition:blur={{ amount: 10 }}>
       
         <h2>Enter your location</h2>
-        <input class="bigger" id="location" bind:value={userInputLocation}>
+        <input class="bigger space" id="location" bind:value={userInputLocation}>
         <br>
         <br>
         <button 
@@ -271,6 +272,11 @@ function redo(){
   font-size: 1.25em;
   font-weight: 500;
   color:#444;
+}
+
+.space {
+  margin:auto;
+  padding: auto;
 }
 
 .weather-info {
