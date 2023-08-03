@@ -191,32 +191,32 @@ function redo(){
         <div class="weather-info">
           <div class="weather-item">
             <p class="bigger">Temperature:</p>
-            <img src="..\public\temperature2_64.png">
+            <img src="temperature2_64.png">
             <p class="weather-data"> {Math.round(weatherData.current.temp)}{temperatureUnit}</p>
           </div>
           <div class="weather-item">
             <p class="bigger">Feels like:</p>
-            <img src="..\public\senses.png">
+            <img src="senses.png">
             <p class="weather-data"> {Math.round(weatherData.current.feels_like)}{temperatureUnit}</p>
           </div>
           <div class="weather-item">
             <p class="bigger">Humidity:</p>
-            <img src="..\public\humidity.png">
+            <img src="humidity.png">
             <p class="weather-data"> {weatherData.current.humidity}%</p>
           </div>
           <div class="weather-item">
             <p class="bigger">Wind:</p>
-            <img src="..\public\wind.png">
+            <img src="wind.png">
             <p class="weather-data"> {weatherData.current.wind_speed} {unitOfWindSpeed}</p>
           </div>
           <div class="weather-item">
             <p class="bigger">Wind direction:</p>
-            <img src="..\public\vane.png">
+            <img src="vane.png">
             <p class="weather-data"> {windDirection}</p>
           </div>
           <div class="weather-item">
             <p class="bigger">UV Index:</p>
-            <img src="..\public\sun.png">
+            <img src="sun.png">
             <p class="weather-data"> {weatherData.current.uvi}</p>
           </div>
         </div>
