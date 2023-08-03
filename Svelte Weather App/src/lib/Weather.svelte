@@ -263,6 +263,8 @@ function customScrollToBottom(){
   
     {/if}
 
+    <!-- Put this back on if accredation is needed, but I think it messes up the design a bit-->
+    <!-- <span class="developer">©2023 Stormscout |  Kent Van Heerden</span> -->
   </div>
 
 <style scoped>
@@ -414,6 +416,12 @@ select {
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
+}
+
+.developer{
+  font-size: 0.75em;
+  font-weight: 500;
+  color: #669;
 }
 
 /* Responsive elements */
