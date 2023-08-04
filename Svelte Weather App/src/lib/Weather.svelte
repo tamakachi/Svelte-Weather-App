@@ -164,7 +164,8 @@ function customScrollToBottom(){
         <br>
         <button 
         on:click|preventDefault={()=>{
-
+          //if userlocation is defined, fetch the data from the API
+          if(userInputLocation){
             let response = fetch('https://api.openweathermap.org/geo/1.0/direct?q=' + userInputLocation +'&limit=5&appid=e7c5f8b9359c36785de51e91035b8fdb');
 
             response
@@ -177,8 +178,14 @@ function customScrollToBottom(){
                 })
               
              
-            })}}
-            
+            })}
+            else {
+              toast.error('Please enter a location', {
+                  position: "bottom-center"
+                })
+          
+          }
+          }} 
 
         >Go!</button>
             <br>
