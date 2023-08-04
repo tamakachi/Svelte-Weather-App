@@ -315,6 +315,7 @@ function customScrollToBottom(){
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  
 }
  .weather-item {
   flex-basis: calc(50% - 10px);
@@ -457,6 +458,11 @@ select {
 select{
   width: 66%;
 }
-}
 
+
+.weather-info{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+}
 </style>
