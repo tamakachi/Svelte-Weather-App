@@ -441,7 +441,7 @@ select {
     width: 75%;
   }
   input {
-  width: 70%;
+  width: 60%;
   padding: 10px;
   border-radius: 7px;
   border: 1px solid rgb(61, 106, 255);
@@ -455,7 +455,7 @@ select {
   text-align: center;
 }
 select{
-  width: 75%;
+  width: 66%;
 }
 }
 
