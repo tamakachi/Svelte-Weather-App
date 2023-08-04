@@ -324,7 +324,7 @@ function customScrollToBottom(){
 
 
 .container {
-  width: 400px;
+  max-width: 400px;
   margin: 0 auto;
 }
 
