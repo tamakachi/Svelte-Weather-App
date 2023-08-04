@@ -25,6 +25,7 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
@@ -70,15 +71,3 @@ button:focus-visible {
   }
 }
 
-/* Responsive padding */
-
-@media screen and (max-width: 600px) {
-  #app {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 2rem;
-    padding-left: 0rem;
-    padding-right: 0rem;
-    text-align: center;
-  }
-}
