@@ -41,12 +41,19 @@ let hideForm = false
 // Populates possibleUserLocations array from the API with multiple locations that match the input
 // Then it scrolls down the page
 function setPossibleUserLocations(data){
+  // if the data is empty, show an error message
+  if(data.length == 0){
+    toast.error('No locations found with that name', {
+      position: "bottom-center"
+    })
+  }
+  else {
     possibleUserLocations = data
     weHaveLocations = true
     console.log(possibleUserLocations)
 
     customScrollToBottom()
-}
+}}
 
 // Function takes degrees and converts them to a cardinal direction then stores it in windDirection
 function getCardinalDirection(degrees){
@@ -338,7 +345,7 @@ function customScrollToBottom(){
 
 h2{
   font-weight: 400;
-  font-size: 1.75em;
+  font-size: 1.5em;
 }
 
 
